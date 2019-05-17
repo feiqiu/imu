@@ -84,7 +84,7 @@ static void imu_gyro_zero(float gx, float gy, float gz, short v) {
 	var_gy = var_gy / GYRO_ZERO_OFFSET_DEEP;
 	var_gz = var_gz / GYRO_ZERO_OFFSET_DEEP;
 
-	LogImp("ÍÓÂÝÒÇÁãÆ¯--:%f,%f,%f,var:%f\r\n", gyro_zero->gx_zero, gyro_zero->gy_zero, gyro_zero->gz_zero, var_gx + var_gy + var_gz);
+	LogImp("ÁãÆ¯¼ì²â:%f,%f,%f,·½²î:%f\r\n", gyro_zero->gx_zero, gyro_zero->gy_zero, gyro_zero->gz_zero, var_gx + var_gy + var_gz);
 
 	if (var_gx + var_gy + var_gz < 0.01) {
 		gyro_zero->flag = 1;
@@ -127,6 +127,7 @@ extern void imu_update(float gx, float gy, float gz, float ax, float ay, float a
 //			ins_gps->v, imu->period, gyro_zero->gx_zero, gyro_zero->gy_zero, gyro_zero->gz_zero);
 
 	imu_gyro_zero(gx, gy, gz, ins_gps->v);
+//	return;
 	if (gyro_zero->flag) {
 		gx_zero = gyro_zero->gx_zero;
 		gy_zero = gyro_zero->gy_zero;
@@ -154,7 +155,7 @@ extern void imu_update(float gx, float gy, float gz, float ax, float ay, float a
 		imu->number = 0;
 		ins_align_pos(&ins_init_pos, &init_yaw, &init_course);
 		if (imu->loc_ins.pos == 'A') {
-			LogImp("meter:%8.2f,period:%10.6f,ÍÓÂÝÒÇÁãÆ¯:%10.6f,%10.6f,%10.6f", //
+			LogImp("Àï³Ì:%8.2f,ÖÜÆÚ:%10.6f,ÁãÆ¯:%10.6f,%10.6f,%10.6f", //
 					imu->meter, imu->period, gyro_zero->gx_zero, gyro_zero->gy_zero, gyro_zero->gz_zero);
 			LogImp("v:%3d," //
 							"init_yaw:%7.2f,%7.2f,"//
